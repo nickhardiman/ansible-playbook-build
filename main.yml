@@ -1,0 +1,7 @@
+---
+- ansible.builtin.import_playbook: machine-hypervisor.yml
+- ansible.builtin.import_playbook: image-gateway.yml
+- ansible.builtin.import_playbook: machine-start.yml
+  vars:
+    host_to_start: gateway.build.example.com
+    

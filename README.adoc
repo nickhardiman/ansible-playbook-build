@@ -4,11 +4,11 @@ Ansible helps me build my home lab.
 This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
 Each VM runs a set of services that support my home lab. 
 
-. *gateway* hosts Bind and Squid
-. *satellite* hosts Postfix
-. *aapcontrol* (Internet Protocol Services, Application Level) hosts DHCPd and NTPd
-. *aaphub* hosts Red Hat IDM (LDAP, CA, DNS)
-. *id* hosts Prometheus, Grafana, and Elastic
+. *gateway* hosts Bind, Squid, Postfix, NFS, haproxy, cockpit
+. *satellite* VM provisioning, RPM repos, maybe DHCP
+. *aapcontrol* Ansible Automation Platform v2 Controller
+. *aaphub* Ansible Private Automation Hub
+. *id* hosts Red Hat IDM (LDAP, CA, DNS)
 
 Under construction. Sections marked with !!! and ??? are notes to self. 
 
