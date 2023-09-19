@@ -93,6 +93,10 @@ sets up everything on a freshly installed host.
 
 [source,shell]
 ....
-curl -O https://raw.githubusercontent.com/nickhardiman/ansible-playbook-build/main/bootstrap.sh 
+curl -O https://raw.githubusercontent.com/nickhardiman/ansible-playbook-build/main/bootstrap.sh
 ....
+
+* Read the script 
+* Follow the instructions and edit the script.
+
 
