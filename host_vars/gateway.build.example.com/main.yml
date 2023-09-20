@@ -35,10 +35,11 @@ net_services:
 # OS
 host: gateway
 fqdn: "{{ host }}.{{ lab_domain }}"
-RPMs: 
-- httpd
-- squid
-- bind
+RPMs:
+  - cockpit
+  - httpd
+  - squid
+  - bind
 
 # kickstart
 # !!! poor separation

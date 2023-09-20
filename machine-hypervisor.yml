@@ -25,8 +25,9 @@
         checksum_sha256: 517abcc67ee3b7212f57e180f5d30be3e8269e7a99e127a3399b7935c7e00a09
         download_href: 'https://api.access.redhat.com/management/v1/images/517abcc67ee3b7212f57e180f5d30be3e8269e7a99e127a3399b7935c7e00a09/download'
 
-# python3-cryptography required by community.crypto.x509_certificate_pipe
   tasks:
+
+    # python3-cryptography required by community.crypto.x509_certificate_pipe
     - name: Install more Python RPM packages
       ansible.builtin.dnf:
         name:
@@ -38,6 +39,11 @@
           - python3.11-pip-wheel
         state: present
 
+    - name: Start the sysadmin console 'cockpit' if a request comes in
+      ansible.builtin.systemd_service:
+        name: cockpit.socket
+        state: started
+        enabled: true
 
 
 # ??? should this be a role in

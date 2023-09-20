@@ -89,10 +89,15 @@
     - role: nick.platform.smtp_client
     - role: nick.platform.squid_proxy
     - role: nick.platform.dns_forwarder
-
     # !!! add time_server?
-    # or to ipsal
     # https://hardiman.consulting/rhel/9/time/chrony.html
+  tasks:
+    - name: Start the sysadmin console 'cockpit' if a request comes in
+      ansible.builtin.systemd_service:
+        name: cockpit.socket
+        state: started
+        enabled: true
+
 
 
 # smoke tests 
