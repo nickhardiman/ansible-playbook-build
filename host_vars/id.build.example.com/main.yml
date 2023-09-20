@@ -44,4 +44,4 @@ RPMs:
   #   ansible-freeipa
 
 # kickstart
-kickstart_template: "kvm-guest.ks.j2"
+kickstart_template: "ipsal.lab.example.com.ks.j2"
