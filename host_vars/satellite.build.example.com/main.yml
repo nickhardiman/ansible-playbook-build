@@ -36,10 +36,10 @@ nics:
   ip: "{{ lab_net_prefix }}.5"
 
 # firewall
+# Command 'firewall-offline-cmd' uses XML files in /usr/lib/firewalld/services/.
 net_services:
-- http
-- https
-- ssh
+  - ssh
+  - RH-Satellite-6
 
 # OS
 host: satellite

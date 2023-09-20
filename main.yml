@@ -4,4 +4,12 @@
 - ansible.builtin.import_playbook: machine-start.yml
   vars:
     host_to_start: gateway.build.example.com
+- ansible.builtin.import_playbook: image-id.yml
+- ansible.builtin.import_playbook: machine-start.yml
+  vars:
+    host_to_start: id.build.example.com
+- ansible.builtin.import_playbook: image-satellite.yml
+- ansible.builtin.import_playbook: machine-start.yml
+  vars:
+    host_to_start: satellite.build.example.com
     
