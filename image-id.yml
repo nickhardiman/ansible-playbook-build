@@ -107,6 +107,8 @@
           mac: "{{ lab_mac_prefix }}:00:03"
           ip_last_octet: "3"
           ipv4: "{{ lab_net_prefix + '.3' }}"
+    - role: nick.platform.cockpit_server
+    - role: nick.platform.insights_client
 
 
 

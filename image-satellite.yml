@@ -7,6 +7,15 @@
 
 # Use a kickstart file to install and configure the OS.
 
+# !!! server cert is missing key usage fields. 
+# error:
+# Checking Key Usage extension on certificate for Key Encipherment 
+# [FAIL]
+# The /etc/pki/tls/certs/satellite.build.example.com.pem does not allow for the 'Key Encipherment' key usage.
+# info:
+# "ERR_SSL_KEY_USAGE_INCOMPATIBLE" while accessing Red Hat Satellite WebUI after configure custom SSL certificates.
+# https://access.redhat.com/solutions/6977733
+
 
 # create a few variables like "volume_image_file_exists"
 - name: Add image facts to hostvars
@@ -28,7 +37,7 @@
   vars_files:
     - ~/vault-credentials.yml
   pre_tasks:
-    - name: "If image exists, stop here"
+    - name: "If VM image exists, stop play here"
       meta: end_host
       when: volume_image_file_exists
   roles:
@@ -76,7 +85,7 @@
     no_proxy: localhost,127.0.0.1,example.com
   #
   pre_tasks:
-    - name: "If base image exists, stop here"
+    - name: "If base image exists, stop play here"
       ansible.builtin.meta: end_host
       when: volume_base_file_exists
     - ansible.builtin.setup:
@@ -107,16 +116,4 @@
         server_proxy_hostname: "gateway.{{ lab_domain }}"
         server_proxy_port: 3128
     - role: nick.platform.latest_packages
-
-
-- name: Keep image and config of the new machine
-  hosts: satellite
-  become: true
-  gather_facts: false
-  serial: 1
-  roles: 
-  # create $FQDN-base.qcow2 image and $FQDN.xml config.
-  # if the $FQDN-base.qcow2 file already exists, this role does not change anything. 
-  - name: "Copy the volume file and config, then delete the machine"
-    role: nick.platform.libvirt_machine_image
-    delegate_to: "{{ groups['hypervisor'][0] }}"
+    - role: nick.platform.insights_client
