@@ -92,12 +92,13 @@
     # !!! add time_server?
     # https://hardiman.consulting/rhel/9/time/chrony.html
   tasks:
+    # !!! move to collection role
     - name: Start the sysadmin console 'cockpit' if a request comes in
       ansible.builtin.systemd_service:
         name: cockpit.socket
         state: started
         enabled: true
-
+    # !!! register with insights
 
 
 # smoke tests 
