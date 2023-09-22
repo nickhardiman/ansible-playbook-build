@@ -26,8 +26,8 @@
     - role: redhat.satellite.manifest
       vars:
         satellite_server_url: "https://{{ inventory_hostname }}"
-        satellite_username: "{{ satellite_username }}"
-        satellite_password: "{{ satellite_password }}"
+        satellite_username: "{{ sat_admin_user }}"
+        satellite_password: "{{ sat_admin_pass }}"
         satellite_organization: "Default Organization"
         satellite_manifest_path: "~/manifest.zip"
         satellite_manifest_download: true
@@ -38,19 +38,19 @@
     - role: redhat.satellite.repositories
       vars:
         satellite_server_url: "https://{{ inventory_hostname }}"
-        satellite_username: "{{ satellite_username }}"
-        satellite_password: "{{ satellite_password }}"
+        satellite_username: "{{ sat_admin_user }}"
+        satellite_password: "{{ sat_admin_pass }}"
         satellite_organization: "Default Organization"
         satellite_products: "{{ satellite_products }}"
 
   tasks:
-  
+
     # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/module/repository_sync/
     - name: "Sync all repositories in each product"
       redhat.satellite.repository_sync:
         server_url: "https://{{ inventory_hostname }}"
-        username: "{{ satellite_username }}"
-        password: "{{ satellite_password }}"
+        username: "{{ sat_admin_user }}"
+        password: "{{ sat_admin_pass }}"
         product: "{{ item }}"
         organization: "Default Organization"
       loop: "{{ satellite_products | map(attribute='name') | unique }}"
