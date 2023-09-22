@@ -1,4 +1,5 @@
 .ssl
 .DS_Store
+.vscode
 vault-credentials.yml
 
