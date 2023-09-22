@@ -41,7 +41,7 @@
         satellite_username: "{{ sat_admin_user }}"
         satellite_password: "{{ sat_admin_pass }}"
         satellite_organization: "Default Organization"
-        satellite_products: "{{ satellite_products }}"
+        satellite_products: "{{ sat_products }}"
 
   tasks:
 
@@ -53,4 +53,4 @@
         password: "{{ sat_admin_pass }}"
         product: "{{ item }}"
         organization: "Default Organization"
-      loop: "{{ satellite_products | map(attribute='name') | unique }}"
+      loop: "{{ sat_products | map(attribute='name') | unique }}"
