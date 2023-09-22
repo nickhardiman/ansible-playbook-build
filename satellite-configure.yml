@@ -21,15 +21,36 @@
     HTTPS_PROXY: "http://gateway.{{ lab_domain }}:3128"
     no_proxy: localhost,127.0.0.1,example.com
   roles:
+
       # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/role/manifest/
     - role: redhat.satellite.manifest
       vars:
         satellite_server_url: "https://{{ inventory_hostname }}"
-        satellite_username: "admin"
-        satellite_password: "Password;1"
+        satellite_username: "{{ satellite_username }}"
+        satellite_password: "{{ satellite_password }}"
         satellite_organization: "Default Organization"
         satellite_manifest_path: "~/manifest.zip"
         satellite_manifest_download: true
         satellite_rhsm_username: "{{ rhsm_user }}"
         satellite_rhsm_password: "{{ rhsm_password }}"
         satellite_manifest_uuid: "db350766-32e5-4713-8789-d40dfbe9c969"
+
+    - role: redhat.satellite.repositories
+      vars:
+        satellite_server_url: "https://{{ inventory_hostname }}"
+        satellite_username: "{{ satellite_username }}"
+        satellite_password: "{{ satellite_password }}"
+        satellite_organization: "Default Organization"
+        satellite_products: "{{ satellite_products }}"
+
+  tasks:
+  
+    # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/module/repository_sync/
+    - name: "Sync all repositories in each product"
+      redhat.satellite.repository_sync:
+        server_url: "https://{{ inventory_hostname }}"
+        username: "{{ satellite_username }}"
+        password: "{{ satellite_password }}"
+        product: "{{ item }}"
+        organization: "Default Organization"
+      loop: "{{ satellite_products | map(attribute='name') | unique }}"
