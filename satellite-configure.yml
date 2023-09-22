@@ -1,0 +1,35 @@
+---
+# !!! move to collection roles
+
+# a simpler version of the far superior 
+# https://github.com/sscheib/ansible_satellite
+#
+# manually created subscription allocation
+# https://access.redhat.com/management/subscription_allocations/db350766-32e5-4713-8789-d40dfbe9c969
+# subscription allocation can be created using API
+# https://access.redhat.com/solutions/6981907
+# How to create subscription allocation using the RHSM API?
+
+- name: Satellite config
+  hosts: satellite
+  gather_facts: true  # required for the role redhat.satellite_operations.installer
+  become: true  # required for the role redhat.satellite_operations.installer
+  vars_files:
+    - ~/vault-credentials.yml
+  environment:
+    http_proxy: "http://gateway.{{ lab_domain }}:3128"
+    HTTPS_PROXY: "http://gateway.{{ lab_domain }}:3128"
+    no_proxy: localhost,127.0.0.1,example.com
+  roles:
+      # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/role/manifest/
+    - role: redhat.satellite.manifest
+      vars:
+        satellite_server_url: "https://{{ inventory_hostname }}"
+        satellite_username: "admin"
+        satellite_password: "Password;1"
+        satellite_organization: "Default Organization"
+        satellite_manifest_path: "~/manifest.zip"
+        satellite_manifest_download: true
+        satellite_rhsm_username: "{{ rhsm_user }}"
+        satellite_rhsm_password: "{{ rhsm_password }}"
+        satellite_manifest_uuid: "db350766-32e5-4713-8789-d40dfbe9c969"

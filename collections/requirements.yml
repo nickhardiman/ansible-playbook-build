@@ -19,7 +19,9 @@ collections:
   - name: community.general
   - name: community.libvirt
   - name: containers.podman
-  
+  - name: redhat.satellite
+  - name: redhat.satellite_operations
+
 # install experiments
 #  - git+https://github.com/myllynen/aap-automation,master
 #  - name: redhat_cop.aap_utilities
