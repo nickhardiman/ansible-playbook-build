@@ -1,3 +1,7 @@
+# a simpler version of the far superior 
+# https://github.com/sscheib/ansible_satellite
+# https://blog.scheib.me/2023/07/09/automating-satellite.html
+
 # many things are defined inline in the playbook. 
 
 # credentials and more
@@ -51,10 +55,11 @@ sat_products:
         download_policy: 'on_demand'
 
 sat_lifecycle_environments:
-  - name: 'build'
+  - name: 'lce-build'
     prior: 'Library'
-  - name: 'deploy'
-    prior: 'build'
+  - name: 'lce-deploy'
+    prior: 'lce-build'
+
 
 sat_content_views:
   - name: 'cv-rhcdn-base-rhel-8'
@@ -110,3 +115,30 @@ sat_content_views:
       - name: 'Red Hat Ansible Automation Platform 2.4 for RHEL 9 x86_64 RPMs'
         product: 'Red Hat Ansible Automation Platform'
 
+
+sat_activation_keys:
+  - name: 'ak-build-rhel-8'
+    description: "All hosts which don't have a specialized host group"
+    lifecycle_environment: 'lce-build'
+    content_view: 'cv-rhcdn-base-rhel-8'
+    release_version: 8
+    unlimited_hosts: true
+    service_level: 'Self-Support'
+    purpose_usage: 'Development/Test'
+    purpose_role: 'Red Hat Enterprise Linux Server'
+    content_overrides:
+      - label: 'satellite-client-6-for-rhel-8-x86_64-rpms'
+        override: 'enabled'
+
+  - name: 'ak-build-rhel-9'
+    description: "All hosts which don't have a specialized host group"
+    lifecycle_environment: 'lce-build'
+    content_view: 'cv-rhcdn-base-rhel-9'
+    release_version: 9
+    unlimited_hosts: true
+    service_level: 'Self-Support'
+    purpose_usage: 'Development/Test'
+    purpose_role: 'Red Hat Enterprise Linux Server'
+    content_overrides:
+      - label: 'satellite-client-6-for-rhel-9-x86_64-rpms'
+        override: 'enabled'

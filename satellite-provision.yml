@@ -3,6 +3,7 @@
 
 # a simpler version of the far superior 
 # https://github.com/sscheib/ansible_satellite
+# https://blog.scheib.me/2023/07/09/automating-satellite.html
 #
 # manually created subscription allocation
 # https://access.redhat.com/management/subscription_allocations/db350766-32e5-4713-8789-d40dfbe9c969
@@ -50,8 +51,11 @@
             network: "{{ lab_net_prefix }}.0"
             mask: '255.255.255.0'
             gateway: "{{ lab_net_prefix }}.1"
-            boot_mode: 'Static'
-            ipam: 'None'
+            ipam: 'DHCP'
+            boot_mode: "DHCP"
+            from_ip: "{{ lab_net_prefix }}.100"
+            to_ip: "{{ lab_net_prefix }}.199"
+            dhcp_proxy: '{{ inventory_hostname }}'
             tftp_proxy: '{{ inventory_hostname }}'
             template_proxy: '{{ inventory_hostname }}'
             discovery_proxy: '{{ inventory_hostname }}'
@@ -65,3 +69,67 @@
             locations:
               - '{{ sat_location }}'
 
+      # 17
+      # activation keys
+      # https://access.redhat.com/documentation/en-us/red_hat_satellite/6.13/html/managing_content/managing_activation_keys_content-management
+      # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/role/activation_keys/
+    - role: redhat.satellite.activation_keys
+      vars:
+        satellite_activation_keys: "{{ sat_activation_keys }}"
+
+      # 18
+      # hostgroups
+    - role: redhat.satellite.hostgroups
+      vars:
+        satellite_hostgroups:
+            # console > Configure > Host Groups > Create Host Group > Host Group
+          - name: "hg-rhel-8"
+            organization: '{{ sat_organization }}'
+            description: "RHEL 8 hostgroup"
+            lifecycle_environment: 'lce-build'
+            content_view: 'cv-rhcdn-base-rhel-8'
+            content_source: '{{ inventory_hostname }}'
+            openscap_proxy: '{{ inventory_hostname }}'
+            # console > Configure > Host Groups > Create Host Group > Network
+            domain: 'build.example.com'
+            subnet: 'sn-build-subnet'
+            # console > Configure > Host Groups > Create Host Group > Operating System
+            architecture: "x86_64"
+            operatingsystem: "RHEL 8.8"
+            kickstart_repository: 'Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.8'
+            ptable: "Kickstart default"
+            pxe_loader: 'PXELinux BIOS'
+            root_pass: 'Password;1'
+            # console > Configure > Host Groups > Create Host Group > Locations, Organizations, Activation Keys
+            locations:
+              - '{{ sat_location }}'
+            organizations:
+              - '{{ sat_organization }}'
+            activation_keys: 
+              - 'ak-build-rhel-8'
+
+            # console > Configure > Host Groups > Create Host Group > Host Group
+          - name: "hg-rhel-9"
+            organization: '{{ sat_organization }}'
+            description: "RHEL 9 hostgroup"
+            lifecycle_environment: 'lce-build'
+            content_view: 'cv-rhcdn-base-rhel-9'
+            content_source: '{{ inventory_hostname }}'
+            openscap_proxy: '{{ inventory_hostname }}'
+            # console > Configure > Host Groups > Create Host Group > Network
+            domain: 'build.example.com'
+            subnet: 'sn-build-subnet'
+            # console > Configure > Host Groups > Create Host Group > Operating System
+            architecture: "x86_64"
+            operatingsystem: "RedHat 9.2"
+            kickstart_repository: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS Kickstart 9.2'
+            ptable: "Kickstart default"
+            pxe_loader: 'PXELinux BIOS'
+            root_pass: 'Password;1'
+            # console > Configure > Host Groups > Create Host Group > Locations, Organizations, Activation Keys
+            locations:
+              - '{{ sat_location }}'
+            organizations:
+              - '{{ sat_organization }}'
+            activation_keys: 
+              - 'ak-build-rhel-9'

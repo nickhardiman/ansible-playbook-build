@@ -54,5 +54,4 @@
     - role: redhat.satellite.content_view_publish
       vars:
         satellite_content_views: "{{ sat_content_views }}"
-        #satellite_content_views: "{{ sat_content_views | map('name') }}"
 
