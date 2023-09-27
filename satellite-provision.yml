@@ -11,6 +11,33 @@
 # https://access.redhat.com/solutions/6981907
 # How to create subscription allocation using the RHSM API?
 
+# !!! todo 
+#
+# add hostgroup parameter remote_execution_ssh_keys
+# add parameter remote_execution_ssh_user for root user
+# for foreman_proxy key and ansible_user?
+# for "Kickstart finish" provisioning template snippet "remote_execution_ssh_keys"
+#
+# create libvirt compute resource
+# create libvirt compute resource compute profiles
+#
+# change compute profile CPU mode from default to host-model
+# causes rhel 9 provision kernel panic 
+#
+# change compute profile memory to at least 3096GB
+# https://access.redhat.com/solutions/6958349
+# Red Hat Satellite Provisioning a RHEL 8.6 system fails with `dracut-initqueue: /lib/dracut-lib.sh: echo: write error: No space left on device
+#
+# host.build.example.com to id DNS
+#
+# fix activation key fail
+#
+# create host collections rhel-8 and rhel-9
+# associate with activation keys
+#
+# add cockpit console to Satellite
+# https://www.redhat.com/sysadmin/rhel-web-console-satellite
+
 - name: Satellite config 
   hosts: satellite
   gather_facts: true  # required for the role redhat.satellite_operations.installer
