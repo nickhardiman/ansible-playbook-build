@@ -19,7 +19,7 @@ Use satellite to build the rest.
 
 == hardware
 
-PC minimum specs 
+I use the playbook on this PC. 
 
 * 64GB RAM 
 * 1TB storage
@@ -30,6 +30,8 @@ It's never enough.
 
 
 == Operating System
+
+I use the playbook on this OS. 
 
 RHEL 9, fresh minimal install
 
@@ -44,14 +46,12 @@ https://github.com/nickhardiman/ansible-playbook-build/blob/main/bootstrap.sh[bo
 
 == Virtual Machines
 
-image::core-network.drawio.png[title="guests"] 
+image::build-network.drawio.png[title="build network"] 
 
 The https://github.com/nickhardiman/ansible-playbook-build/blob/main/group_vars/all/main.yml[defaults file] defines a lot of values. 
 For instance, most 
 MAC addresses are set to ** 52:54:00:13:00:* **,  and 
 IPv4 addresses are set to ** 192.168.13.* **. 
-Check out DHCP's 
-https://github.com/nickhardiman/ansible-collection-platform/blob/main/roles/dhcp_server/templates/dhcpd.conf.j2[config].
 
 .guests attached to bridges
 [%header,format=csv]
