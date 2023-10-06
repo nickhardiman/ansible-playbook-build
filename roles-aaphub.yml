@@ -49,9 +49,10 @@
         record_a_value: "{{ nics[0]['ip'] }}"
         record_ptr_name: "{{ nics[0]['ip'].split('.')[3] }}"
         record_ptr_value: "{{ inventory_hostname + '.' }}"
-    - role: nick.platform.cdn_repo_consumer
-      vars:
-        server_proxy_hostname: "gateway.{{ lab_domain }}"
-        server_proxy_port: 3128
+    - role: nick.platform.satellite_repo_consumer
+    # - role: nick.platform.cdn_repo_consumer
+    #   vars:
+    #     server_proxy_hostname: "gateway.{{ lab_domain }}"
+    #     server_proxy_port: 3128
     - role: nick.platform.latest_packages
     - role: nick.platform.insights_client
