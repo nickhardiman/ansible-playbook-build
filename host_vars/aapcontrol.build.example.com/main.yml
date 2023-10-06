@@ -7,11 +7,11 @@
 # default RHEL 9
 
 # compute
-# default 2 cores
-# default 4GiB memory
-# Default fails the preflight check.
-#   collections/ansible_collections/ansible/automation_platform_installer/roles/preflight/defaults/main.yml
-#   required_ram: 7400
+# double the default
+# half what is recommended by 
+# https://access.redhat.com/documentation/en-us/reference_architectures/2021/html-single/deploying_ansible_automation_platform_2.1/index#node_requirements
+cpus: 4
+ram: 8192
 
 # storage
 # default 30GB disk
@@ -36,7 +36,7 @@ net_services:
   - ssh
   - http
   - https
-  
+
 # OS
 host: aapcontrol
 fqdn: "{{ host }}.{{ lab_domain }}"

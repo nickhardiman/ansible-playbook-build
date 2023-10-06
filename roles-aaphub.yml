@@ -2,7 +2,7 @@
 
 # create a few variables like "volume_image_file_exists"
 - name: Add image facts to hostvars
-  hosts: "{{ host_to_build }}"
+  hosts: aaphub
   become: true
   gather_facts: false
   roles:
