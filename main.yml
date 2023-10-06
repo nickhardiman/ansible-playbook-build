@@ -26,10 +26,10 @@
 - ansible.builtin.import_playbook: vm-kickstart.yml
   vars:
     host_to_build: aaphub.build.example.com
-- ansible.builtin.import_playbook: aaphub-roles.yml
+- ansible.builtin.import_playbook: roles-aaphub.yml
 # AAP Controller
 - ansible.builtin.import_playbook: vm-kickstart.yml
   vars:
     host_to_build: aapcontrol.build.example.com
-- ansible.builtin.import_playbook: aapcontrol-roles.yml
+- ansible.builtin.import_playbook: roles-aapcontrol.yml
 
