@@ -1,13 +1,16 @@
 ---
 - ansible.builtin.import_playbook: machine-hypervisor.yml
+# helper utilities
 - ansible.builtin.import_playbook: image-gateway.yml
 - ansible.builtin.import_playbook: template-to-machine.yml
   vars:
     host_to_start: gateway.build.example.com
+# Red Hat Identity Manager
 - ansible.builtin.import_playbook: image-id.yml
 - ansible.builtin.import_playbook: template-to-machine.yml
   vars:
     host_to_start: id.build.example.com
+# Red Hat Satellite
 - ansible.builtin.import_playbook: image-satellite.yml
 - ansible.builtin.import_playbook: satellite-install.yml
 - ansible.builtin.import_playbook: satellite-content.yml
@@ -19,9 +22,14 @@
 - ansible.builtin.import_playbook: template-to-machine.yml
   vars:
     host_to_start: satellite.build.example.com
-# Ansible Automation Platform Private Automation Hub
+# AAP PAH (Ansible Automation Platform Private Automation Hub)
 - ansible.builtin.import_playbook: vm-kickstart.yml
   vars:
     host_to_build: aaphub.build.example.com
 - ansible.builtin.import_playbook: aaphub-roles.yml
+# AAP Controller
+- ansible.builtin.import_playbook: vm-kickstart.yml
+  vars:
+    host_to_build: aapcontrol.build.example.com
+- ansible.builtin.import_playbook: aapcontrol-roles.yml
 
