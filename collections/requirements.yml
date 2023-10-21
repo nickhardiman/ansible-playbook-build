@@ -19,8 +19,11 @@ collections:
   - name: community.general
   - name: community.libvirt
   - name: containers.podman
+  # from https://console.redhat.com/api/automation-hub/
   - name: redhat.satellite
   - name: redhat.satellite_operations
+  - name: ansible.controller
+# infra.aap_utilities?
 
 # install experiments
 #  - git+https://github.com/myllynen/aap-automation,master
