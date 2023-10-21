@@ -35,7 +35,7 @@
     host_to_build: aapcontrol.build.example.com
 - ansible.builtin.import_playbook: roles-aapcontrol.yml
 
-# add AAP install here
+# !!! add AAP install here
 # then
 - ansible.builtin.import_playbook: machine-to-template.yml
   vars:

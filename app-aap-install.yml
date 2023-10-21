@@ -1,0 +1,17 @@
+---
+# a simpler version of the far superior 
+# https://github.com/myllynen/aap-automation/tree/master
+#
+#
+- name: AAP install
+  hosts: aapcontrol
+  gather_facts: true
+  become: true
+
+  tasks:
+  - name: Install Ansible Automation Platform installer package
+    become: true
+    dnf:
+      name: ansible-automation-platform-installer
+      enablerepo: ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms
+      state: present
