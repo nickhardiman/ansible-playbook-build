@@ -9,7 +9,8 @@
     - name: "check for existing images"
       role: nick.platform.libvirt_image_facts
       delegate_to: "{{ groups['hypervisor'][0] }}"
-      
+
+
 # If there is no base file, assume configuration didn't complete and 
 # we are good to go again.
 - name: Configure new server machine
