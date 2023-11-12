@@ -5,7 +5,7 @@ for GUEST in \
   satellite.build.example.com     \
   id.build.example.com 
 do 
-  echo -n $GUEST
-  ssh nick@$GUEST echo ': alive'
+  echo -n "$GUEST: "
+  ssh nick@$GUEST echo 'alive'
   sleep 1
 done
