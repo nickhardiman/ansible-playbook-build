@@ -6,6 +6,15 @@
 # For the remaining parts of these names and addresses, see each host's vars file eg.
 #   host_vars/gateway.build.example.com/main.yml
 #
+#
+# nework identifiers
+# 10 - source public 
+# 11 - source private 
+# 12 - build public 
+# 13 - build private 
+# 14 - supply public 
+# 15 - supply private 
+#
 # Changing address means changing a few variables. eg.
 # "13" appears in three places here.
 lab_net_short_name: build
