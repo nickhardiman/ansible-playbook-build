@@ -86,6 +86,16 @@
     # by changing the bridge profile.
     # requires gather_facts to set ansible_python
     # not convinced this finishes with re-activation "nmcli con up bridge-public0"
+    # nework identifiers
+    #
+    # nework identifiers
+    # 10 - source public 
+    # 11 - source private network is hosted by 192.168.1.135
+    # 12 - build public 
+    # 13 - build private network is hosted by 192.168.1.98
+    # 14 - supply public 
+    # 15 - supply private network is hosted by 192.168.1.195
+    #
     - name: Use rhel-system-role network
       ansible.builtin.include_role:
         name: rhel-system-roles.network
@@ -98,11 +108,21 @@
             # interface_name defaults to the connection name
             ip:
               route:
-                - network: 192.168.136.0
+                # - network: 192.168.11.0
+                #   prefix: 24
+                #   gateway: 192.168.1.135
+                - network: 192.168.13.0
+                  prefix: 24
+                  gateway: 192.168.1.98
+                - network: 192.168.15.0
                   prefix: 24
                   gateway: 192.168.1.195
               dhcp4: true
               auto6: true
 
     # check
+    # still connected to Internet? 
     # ip route list
+    # ping 8.8.8.8
+    # host www.google.com
+    # curl --fail https://www.redhat.com/

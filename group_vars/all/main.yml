@@ -9,11 +9,11 @@
 #
 # nework identifiers
 # 10 - source public 
-# 11 - source private 
+# 11 - source private network is hosted by 192.168.1.135
 # 12 - build public 
-# 13 - build private 
+# 13 - build private network is hosted by 192.168.1.98
 # 14 - supply public 
-# 15 - supply private 
+# 15 - supply private network is hosted by 192.168.1.195
 #
 # Changing address means changing a few variables. eg.
 # "13" appears in three places here.
