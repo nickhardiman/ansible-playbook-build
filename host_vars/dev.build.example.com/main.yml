@@ -38,6 +38,7 @@ net_services:
 host: dev
 fqdn: "{{ host }}.{{ lab_domain }}"
 RPMs:
+  - ansible-core
   - cockpit
 
 # kickstart

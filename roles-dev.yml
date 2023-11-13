@@ -52,7 +52,7 @@
         record_ptr_value: "{{ inventory_hostname + '.' }}"
     - role: nick.platform.satellite_repo_consumer
       vars:
-        activationkey: ak-build-rhel-9
+        activationkey: ak-build-aap
     - role: nick.platform.latest_packages
     - role: ipaclient
       vars:
@@ -64,3 +64,13 @@
     - role: nick.platform.insights_client
     - role: nick.platform.smtp_client
 
+  tasks:
+
+    - name: Install Ansible RPM packages
+      ansible.builtin.dnf:
+        name:
+          - ansible-builder
+          - ansible-navigator
+          - ansible-lint
+        enablerepo: ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms
+        state: present
