@@ -38,7 +38,9 @@ net_services:
 host: test
 fqdn: "{{ host }}.{{ lab_domain }}"
 RPMs:
+  - ansible-core
   - cockpit
+  - git
 
 # kickstart
 kickstart_template: "kvm-guest-nic-static.ks.j2"
