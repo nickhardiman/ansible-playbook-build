@@ -73,9 +73,9 @@ GIT_USER=nick
 
 # CA name to go in the certificate. 
 # !!! should include lab_domain value
-LAB_NET_SHORT_NAME=build
-LAB_DOMAIN=$LAB_NET_SHORT_NAME.example.com
-CA_FQDN=ca.$LAB_DOMAIN
+LAB_BUILD_NET_SHORT_NAME=build
+LAB_BUILD_DOMAIN=$LAB_BUILD_NET_SHORT_NAME.example.com
+CA_FQDN=ca.$LAB_BUILD_DOMAIN
 
 # That's it. 
 # No need to change anything below here. 
@@ -110,7 +110,7 @@ configure_host_os() {
          sudo systemctl reboot
      fi
      # Set hostname 
-     # hostnamectl hostname host.$LAB_DOMAIN
+     # hostnamectl hostname host.$LAB_BUILD_DOMAIN
      # Enable nested virtualization? 
      # In /etc/modprobe.d/kvm.conf 
      # options kvm_amd nested=1
@@ -232,8 +232,8 @@ clone_my_ansible_playbook() {
      # Get my playbook.
      mkdir -p ~/ansible/playbooks/
      cd ~/ansible/playbooks/
-     git clone https://github.com/nickhardiman/ansible-playbook-$LAB_NET_SHORT_NAME.git
-     cd ansible-playbook-$LAB_NET_SHORT_NAME/
+     git clone https://github.com/nickhardiman/ansible-playbook-$LAB_BUILD_NET_SHORT_NAME.git
+     cd ansible-playbook-$LAB_BUILD_NET_SHORT_NAME/
 }
 
 
@@ -251,7 +251,7 @@ download_ansible_libraries() {
     ls /usr/share/ansible/collections/ansible_collections/community/
     # Install other collections to ~/.ansible/collections/
     # (https://github.com/nickhardiman/ansible-playbook-build/blob/main/ansible.cfg#L13)
-    cd ~/ansible/playbooks/ansible-playbook-$LAB_NET_SHORT_NAME/
+    cd ~/ansible/playbooks/ansible-playbook-$LAB_BUILD_NET_SHORT_NAME/
     ansible-galaxy collection install -r collections/requirements.yml 
     # Install roles. 
     ansible-galaxy role install -r roles/requirements.yml 
@@ -298,18 +298,22 @@ setup_ca_certificate() {
         -out $CA_FQDN-cert.pem
     # https://hardiman.consulting/rhel/9/security/id-certificate-ca-trust.html
     # Trust the certificate. 
-    sudo cp ./$CA_FQDN-cert.pem /etc/pki/ca-trust/source/anchors/ca-certificate.pem
+    sudo cp ./$CA_FQDN-cert.pem /etc/pki/ca-trust/source/anchors/
     sudo chmod 0644 /etc/pki/ca-trust/source/anchors/ca-certificate.pem
     sudo cp ./$CA_FQDN-key.pem /etc/pki/tls/private/ca-certificate.key
     sudo update-ca-trust
     # Clean up.
     # rm cakey.pass cakey.pem careq.pem cacert.pem
+    # !!! copy all three CA certificates from /home/nick/ to all host and VM trust stores. 
+    #  * ca.source.example.com-cert.pem
+    #  * ca.build.example.com-cert.pem
+    #  * ca.supply.example.com-cert.pem
 }
 
 # !!! not working
 #         --extra-vars="user_ansible_public_key=$USER_ANSIBLE_PUBLIC_KEY" \
 run_playbook() {
-    cd ~/ansible/playbooks/ansible-playbook-$LAB_NET_SHORT_NAME/
+    cd ~/ansible/playbooks/ansible-playbook-$LAB_BUILD_NET_SHORT_NAME/
     # create machines
     ansible-playbook \
         --vault-pass-file ~/my-vault-pass  \
