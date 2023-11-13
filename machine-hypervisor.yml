@@ -108,12 +108,12 @@
             # interface_name defaults to the connection name
             ip:
               route:
-                # - network: 192.168.11.0
-                #   prefix: 24
-                #   gateway: 192.168.1.135
-                - network: 192.168.13.0
+                - network: 192.168.11.0
                   prefix: 24
-                  gateway: 192.168.1.98
+                  gateway: 192.168.1.135
+                # - network: 192.168.13.0
+                #   prefix: 24
+                #   gateway: 192.168.1.98
                 - network: 192.168.15.0
                   prefix: 24
                   gateway: 192.168.1.195
