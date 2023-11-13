@@ -2,7 +2,7 @@
 
 # create a few variables like "volume_image_file_exists"
 - name: Add image facts to hostvars
-  hosts: aaphub
+  hosts: dev
   become: true
   gather_facts: false
   roles:
@@ -13,7 +13,7 @@
 # If there is no base file, assume configuration didn't complete and 
 # we are good to go again.
 - name: Configure new server machine
-  hosts: aaphub
+  hosts: dev
   become: true
   gather_facts: false
   serial: 1

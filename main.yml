@@ -52,3 +52,27 @@
 - ansible.builtin.import_playbook: template-to-machine.yml
   vars:
     host_to_start: aapcontrol.build.example.com
+
+# Dev
+- ansible.builtin.import_playbook: vm-kickstart.yml
+  vars:
+    host_to_build: dev.build.example.com
+- ansible.builtin.import_playbook: roles-dev.yml
+- ansible.builtin.import_playbook: machine-to-template.yml
+  vars:
+    host_to_image: dev.build.example.com
+- ansible.builtin.import_playbook: template-to-machine.yml
+  vars:
+    host_to_start: dev.build.example.com
+
+# Test
+- ansible.builtin.import_playbook: vm-kickstart.yml
+  vars:
+    host_to_build: test.build.example.com
+- ansible.builtin.import_playbook: roles-test.yml
+- ansible.builtin.import_playbook: machine-to-template.yml
+  vars:
+    host_to_image: test.build.example.com
+- ansible.builtin.import_playbook: template-to-machine.yml
+  vars:
+    host_to_start: test.build.example.com

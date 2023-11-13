@@ -68,6 +68,8 @@ id,                 enp1s0,    52:54:00:13:00:04, 192.168.13.4,   build.example.
 satellite,          enp1s0,    52:54:00:13:00:05, 192.168.13.5,   build.example.com
 aaphub,             enp1s0,    52:54:00:13:00:06, 192.168.13.6,   build.example.com
 aapcontrol,         enp1s0,    52:54:00:13:00:07, 192.168.13.7,   build.example.com
+dev,                enp1s0,    52:54:00:13:00:08, 192.168.13.8,   build.example.com
+test,               enp1s0,    52:54:00:13:00:09, 192.168.13.9,   build.example.com
 |===
 
 
