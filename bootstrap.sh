@@ -216,9 +216,9 @@ install_ansible_core() {
 }
 
 
-clone_my_ansible_collection() {
-     # get my libvirt collection.
-     # I'm not using ansible-galaxy because I am actively developing this role.
+clone_my_ansible_collections() {
+     # get my libvirt, OS and app roles, all bundled into a couple collections.
+     # I'm not using ansible-galaxy because I make frequent changes.
      # Check out the directive in ansible.cfg in some playbooks.
      mkdir -p ~/ansible/collections/ansible_collections/nick/
      cd ~/ansible/collections/ansible_collections/nick/
@@ -226,6 +226,7 @@ clone_my_ansible_collection() {
      #   fatal: destination path 'libvirt-host' already exists and is not an empty directory.
      # !!! not uploaded
      git clone https://github.com/nickhardiman/ansible-collection-platform.git platform
+     git clone https://github.com/nickhardiman/ansible-collection-app.git app
 }
 
 clone_my_ansible_playbook() {
@@ -338,7 +339,7 @@ fi
 check_ansible_user
 copy_ansible_user_public_key
 install_ansible_core
-clone_my_ansible_collection
+clone_my_ansible_collections
 clone_my_ansible_playbook
 download_ansible_libraries
 add_rhsm_account_to_vault

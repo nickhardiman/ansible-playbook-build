@@ -3,7 +3,8 @@
 # If there is no base file, assume configuration didn't complete and 
 # we are good to go again.
 - name: Configure new server machine
-  hosts: satellite
+  hosts: aapcontrol
+  #hosts: satellite
   # hosts: id
   # hosts: gateway
   # hosts: aaphub
@@ -18,5 +19,6 @@
       no_proxy: localhost,127.0.0.1,example.com
   #
   roles:
-    - role: nick.platform.insights_client
+    - role: nick.app.prometheus_node_exporter
+    #- role: nick.platform.insights_client
 
