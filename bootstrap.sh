@@ -229,6 +229,7 @@ clone_my_ansible_collections() {
      git clone https://github.com/nickhardiman/ansible-collection-app.git app
 }
 
+
 clone_my_ansible_playbook() {
      # Get my playbook.
      mkdir -p ~/ansible/playbooks/
