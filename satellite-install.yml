@@ -4,12 +4,19 @@
 # a simpler version of the far superior 
 # https://github.com/sscheib/ansible_satellite
 #
+# 
+
+# !!! maybe simplify with
+# https://docs.ansible.com/ansible/latest/collections/community/general/rhsm_repository_module.html
 #
+# official doc
+# https://access.redhat.com/documentation/en-us/red_hat_satellite/6.14/html-single/installing_satellite_server_in_a_connected_network_environment/index#configuring-repositories_satellite
 - name: Satellite repos and installer
   hosts: satellite
   gather_facts: true  # required for the role redhat.satellite_operations.installer
   become: true  # required for the role redhat.satellite_operations.installer
   roles:
+    # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/rhel_system_roles/docs/
     - role: redhat.rhel_system_roles.rhc
       vars: 
         rhc_repositories:
@@ -23,9 +30,13 @@
           state: 'enabled'
         - name: 'satellite-utils-6.13-for-rhel-8-x86_64-rpms'
           state: 'enabled'
+# !!! add 
+# rhc_release: 8
+# serve# https://github.com/sscheib/ansible_satellite/blob/main/host_vars/satellite.office.int.scheib.me/00b_register_satellite.yml#L24
 
   tasks:
 
+  # !!! fixed in 6.14?
     # modularity name and stream (no profile)
     - name: Install the Postgresql modularity stream with defined stream
       ansible.builtin.dnf:
@@ -36,6 +47,8 @@
         name: '@ruby:2.7'
         state: present
 
+# !!! try
+# https://github.com/ansible/ansible/issues/64852#issuecomment-760454213
       # ansible.builtin.dnf can't enable a modularity stream, only install it. 
       #name: '@satellite:el8'
       # enables satellite and satellite-maintenance, not satellite-utils
@@ -56,6 +69,7 @@
   gather_facts: true  # required for the role redhat.satellite_operations.installer
   become: true  # required for the role redhat.satellite_operations.installer
   roles:
+    # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite_operations/docs/
     - role: redhat.satellite_operations.installer
       vars:
         satellite_installer_scenario: satellite

@@ -7,9 +7,16 @@
 # default RHEL 9
 
 # compute
-# default 2 cores
-# default 4GiB memory
-# Default fails the preflight check.
+cpus: 4
+ram: 12288
+
+# Default 4Gb is not enough 
+# Even 8G can fail syncing from the huge galaxy.ansible.com repo.
+# galaxy sync "Associating Content" causes OOMkiller fun
+#   Nov 16 17:31:00 aaphub kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/system.slice/system-pulpcore\x2dworker.slice/pulpcore-worker@2.service,task=pulpcore-worker,pid=1822,uid=984
+#   Nov 16 17:31:00 aaphub kernel: Out of memory: Killed process 1822 (pulpcore-worker) total-vm:2228980kB, anon-rss:2092920kB, file-rss:0kB, shmem-rss:0kB, UID:984 pgtables:4200kB oom_score_adj:0
+#   Nov 16 17:31:00 aaphub pulpcore-worker[1700]: pulp [None]: pulpcore.tasking.pulpcore_worker:WARNING: Task process for 5a31e798-14ac-4907-9a4f-15e9a65a2e30 exited with non zero exitcode -9.
+# 4G fails the preflight check.
 #   collections/ansible_collections/ansible/automation_platform_installer/roles/preflight/defaults/main.yml
 #   required_ram: 7400
 

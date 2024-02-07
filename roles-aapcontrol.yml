@@ -57,3 +57,5 @@
     #     server_proxy_port: 3128
     - role: nick.platform.latest_packages
     - role: nick.platform.insights_client
+    - role: nick.app.prometheus_node_exporter
+    
