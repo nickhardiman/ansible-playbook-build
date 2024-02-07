@@ -125,6 +125,7 @@
             ipv4: "{{ lab_net_prefix + '.3' }}"
     - role: nick.platform.cockpit_server
     - role: nick.platform.insights_client
+    - role: nick.platform.smtp_client
 
 
 
