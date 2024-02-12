@@ -16,6 +16,12 @@
 # "ERR_SSL_KEY_USAGE_INCOMPATIBLE" while accessing Red Hat Satellite WebUI after configure custom SSL certificates.
 # https://access.redhat.com/solutions/6977733
 
+# !!! add rexuser to all hosts
+# add passwordless sudo, same as ansible-user
+# https://access.redhat.com/solutions/2650071
+# How to setup Remote Execution using non-root user on RHEL systems connected to Red Hat Satellite 6?
+# https://access.redhat.com/solutions/5460381
+# Configure the satellite remote execution to use SSH key other than foreman-proxy SSH key
 
 # create a few variables like "volume_image_file_exists"
 - name: Add image facts to hostvars
