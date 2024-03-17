@@ -2,9 +2,33 @@
 
 [NOTE] 
 ====
+Under construction. Sections marked with !!! and ??? are notes to self. 
+Like this one.
+
 !!! 
 Write one command to kick off the build of everything.
-Each machine has its own playbook - combine three playbooks into one?
+
+Use one certificate CA, not three.
+
+Build gateway and satellite. 
+
+Use satellite to build the rest. 
+====
+
+Ansible helps me assemble my home lab. 
+I used three PCs to build a reasonably complicated network.
+Each PC has a purpose.
+One PC acts as an application builder and manager. It manages the building of things.  Another PC provides sources of data for this builder, and one is supplied by the builder.
+
+* *source* PC is a home for applications that provide data sources to Red Hat software, such as third party data vaults, user directories and code stores.
+* *build* PC holds Red Hat software, such as AAP, IdM and Satellite.
+* *supply* PC is where things are collected, such as logs, metrics, and mail. It is also where build applications create customer services.  
+This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
+
+
+== built by Ansible
+
+Each machine has its own Ansible playbook.
 These create a network of virtual machines on three fresh RHEL 9 hosts.
 
 * https://github.com/nickhardiman/ansible-playbook-source
@@ -15,26 +39,6 @@ Two supporting collections so far.
 
 * https://github.com/nickhardiman/ansible-collection-platform
 * https://github.com/nickhardiman/ansible-collection-app
-====
-
-Ansible helps me build my home lab. 
-This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
-
-== virtual machines 
-
-Each VM runs a set of services that support my home lab. 
-
-. *gateway* hosts Bind, Squid, Postfix, NFS, haproxy, cockpit
-. *satellite* VM provisioning, RPM repos, maybe DHCP
-. *aapcontrol* Ansible Automation Platform v2 Controller
-. *aaphub* Ansible Private Automation Hub
-. *id* hosts Red Hat IDM (LDAP, CA, DNS)
-
-Under construction. Sections marked with !!! and ??? are notes to self. 
-
-Build gateway and satellite. 
-
-Use satellite to build the rest. 
 
 
 == hardware
@@ -49,7 +53,7 @@ It's a lot of memory, and yet it isn't enough.
 It's never enough. 
 
 
-== Operating System
+== OS (Operating System)
 
 I use the playbook on this OS. 
 
@@ -64,7 +68,7 @@ https://github.com/nickhardiman/ansible-playbook-build/blob/main/bootstrap.sh[bo
 
 
 
-== Virtual Machines
+== VMs (Virtual Machines)
 
 image::build-network.drawio.png[title="build network"] 
 
@@ -91,6 +95,19 @@ aapcontrol,         enp1s0,    52:54:00:13:00:07, 192.168.13.7,   build.example.
 dev,                enp1s0,    52:54:00:13:00:08, 192.168.13.8,   build.example.com
 test,               enp1s0,    52:54:00:13:00:09, 192.168.13.9,   build.example.com
 |===
+
+
+== applications 
+
+Each VM runs a set of services that support my home lab. 
+
+. *gateway* hosts Bind, Squid, Postfix, NFS, haproxy, cockpit
+. *satellite* VM provisioning, RPM repos, maybe DHCP
+. *aapcontrol* Ansible Automation Platform v2 Controller
+. *aaphub* Ansible Private Automation Hub
+. *id* hosts Red Hat IDM (LDAP, CA, DNS)
+. *dev* 
+. *test* 
 
 
 == cheat sheet
