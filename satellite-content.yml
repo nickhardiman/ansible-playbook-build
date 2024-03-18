@@ -3,6 +3,8 @@
 
 # a simpler version of the far superior 
 # https://github.com/sscheib/ansible_satellite
+# numbers below correspond to numbers in Steffen's doc.
+# https://blog.scheib.me/2023/07/09/automating-satellite.html#create-lifecycle-environments
 #
 # manually created subscription allocation
 # https://access.redhat.com/management/subscription_allocations/db350766-32e5-4713-8789-d40dfbe9c969

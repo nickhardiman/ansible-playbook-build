@@ -16,7 +16,9 @@ satellite_username: "{{ sat_admin_user }}"
 satellite_password: "{{ sat_admin_pass }}"
 satellite_organization: "{{ sat_organization }}"
 
-sat_products: 
+  # copy paste from 
+  # https://github.com/sscheib/ansible_satellite/blob/main/host_vars/satellite.office.int.scheib.me/06a_products.yml
+sat_products:
   - name: 'Red Hat Enterprise Linux for x86_64'
     repository_sets:
       - name: 'Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)'
@@ -53,6 +55,21 @@ sat_products:
         download_policy: 'on_demand'
       - name: 'Red Hat Ansible Automation Platform 2.4 for RHEL 9 x86_64 (RPMs)'
         download_policy: 'on_demand'
+  # copy paste from 
+  # https://console.redhat.com/ansible/automation-hub/repo/published/redhat/satellite/content/role/repositories/
+  - name: Red Hat Enterprise Linux Server
+    repository_sets:
+      - name: Red Hat Enterprise Linux 7 Server (RPMs)
+        basearch: x86_64
+        releasever: 7Server
+      - name: Red Hat Enterprise Linux 6 Server (RPMs)
+        basearch: x86_64
+        releasever: 6Server
+      - name: Red Hat Enterprise Linux 7 Server - Extras (RPMs)
+        basearch: x86_64
+      - name: Red Hat Enterprise Linux 7 Server - Optional (RPMs)
+        basearch: x86_64
+        releasever: 7Server
 
 sat_lifecycle_environments:
   - name: 'lce-build'
