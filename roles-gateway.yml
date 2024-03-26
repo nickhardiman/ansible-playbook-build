@@ -30,7 +30,7 @@
 - name: Configure new server machine
   hosts: gateway
   become: true
-  gather_facts: false
+  gather_facts: true
   serial: 1
   vars_files:
     - ~/vault-credentials.yml
@@ -52,7 +52,42 @@
     - role: nick.platform.insights_client
     # !!! add time_server?
     # https://hardiman.consulting/rhel/9/time/chrony.html
+    # !!! add routes to other VMs. Should this be here?
+    - role: rhel-system-roles.network
+      vars:
+        network_connections:
+          - name: enp2s0
+            # state: up
+            type: ethernet
+            # interface_name: defaults to the connection name
+            ip:
+              address:
+                - "{{ nics[1]['ip'] }}/24"
+              route:
+                - network: "{{ lab_source_net_prefix }}.0"
+                  prefix: 24
+                  gateway: "{{ lab_build_net_prefix }}.1"
+                # - network: "{{ lab_build_net_prefix }}.0"
+                #   prefix: 24
+                #   gateway: "{{ lab_build_net_prefix }}.1"
+                - network: "{{ lab_supply_net_prefix }}.0"
+                  prefix: 24
+                  gateway: "{{ lab_build_net_prefix }}.1"
+              route_append_only: true
+              # dhcp4: false
 
+    tasks:
+
+      - name: Update runtime state from connection profile (shell hack)
+        ansible.builtin.shell:
+          cmd: nmcli connection up enp2s0
+
+    # check
+    # still connected to Internet? 
+    # ip route list
+    # ping 8.8.8.8
+    # host www.google.com
+    # curl --fail https://www.redhat.com/
 
 # smoke tests 
 # !!! add tests

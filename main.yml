@@ -2,6 +2,7 @@
 - ansible.builtin.import_playbook: machine-hypervisor.yml
 
 # Squid, HAProxy
+# replaces file image-gateway.yml
 - ansible.builtin.import_playbook: vm-kickstart.yml
   vars:
     host_to_build: gateway.build.example.com
