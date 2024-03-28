@@ -75,6 +75,7 @@
                   gateway: "{{ lab_build_net_prefix }}.1"
               route_append_only: true
               # dhcp4: false
+    - role: nick.platform.haproxy
 
     tasks:
 
