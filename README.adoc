@@ -22,7 +22,8 @@ One PC acts as an application builder and manager. It manages the building of th
 
 * *source* PC is a home for applications that provide data sources to Red Hat software, such as third party data vaults, user directories and code stores.
 * *build* PC holds Red Hat software, such as AAP, IdM and Satellite.
-* *supply* PC is where things are collected, such as logs, metrics, and mail. It is also where build applications create customer services.  
+* *supply* PC is where things are collected, such as logs, metrics, and mail, and where workloads run. Customer services are built on this machine.  
+
 This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
 
 
@@ -106,7 +107,7 @@ Each VM runs a set of services that support my home lab.
 . *aapcontrol* Ansible Automation Platform v2 Controller
 . *aaphub* Ansible Private Automation Hub
 . *id* hosts Red Hat IDM (LDAP, CA, DNS)
-. *dev* 
+. *dev* is the toolshed.
 . *test* 
 
 
@@ -116,6 +117,7 @@ Each VM runs a set of services that support my home lab.
 === PC and OS
 
 Start with a machine running RHEL 9. 
+Use your free developer account to grab the installer ISO from https://access.redhat.com/downloads.
 A fresh minimal install is fine. 
 
 Only tested on a box with one ethernet interface, plugged into the network.
