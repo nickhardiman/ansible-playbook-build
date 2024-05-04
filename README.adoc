@@ -19,7 +19,7 @@ Ansible helps me assemble my home lab.
 This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
 
 
-== lab1 is a cluster of three PCs
+== home-lab-1 is a cluster of three PCs
 
 I used three PCs to build a reasonably complicated network.
 
@@ -32,16 +32,6 @@ One PC acts as an application builder and manager. It manages the building of th
 * *build* PC holds Red Hat software, such as AAP, IdM and Satellite.
 * *supply* PC is where things are collected, such as logs, metrics, and mail, and where workloads run. Customer services are built on this machine.  
 
-Each machine has two networks. 
-One is for public access from elsewhere in the network. 
-The other is private, for all the VMs.
-
-* 192.168.10.0/24 - public network on the source PC
-* 192.168.11.0/24 - private network on the source PC
-* 192.168.12.0/24 - public network on the build PC
-* 192.168.13.0/24 - private network on the build PC
-* 192.168.14.0/24 - public network on the supply PC
-* 192.168.15.0/24 - private network on the supply PC
 
 == built by Ansible
 
@@ -84,8 +74,25 @@ See instructions in
 https://github.com/nickhardiman/ansible-playbook-build/blob/main/bootstrap.sh[bootstrap.sh].
 
 
+== virtual network
+
+Each machine has two networks. 
+One is for public access from elsewhere in the network. 
+The other is private, for all the VMs.
+
+* 192.168.10.0/24 - public network on the source PC
+* 192.168.11.0/24 - private network on the source PC
+* 192.168.12.0/24 - public network on the build PC
+* 192.168.13.0/24 - private network on the build PC
+* 192.168.14.0/24 - public network on the supply PC
+* 192.168.15.0/24 - private network on the supply PC
+
 
 == VMs (Virtual Machines)
+
+Each machine runs a bunch of VMs. 
+They can't all fit on one of these little PCs - there's not enough memory.
+These VMs are on the build machine.
 
 image::build-network.drawio.png[title="build network"] 
 
