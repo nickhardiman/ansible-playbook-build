@@ -19,9 +19,12 @@ Ansible helps me assemble my home lab.
 This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that's the technical term) of Virtual Machines. 
 
 
-== a cluster of three PCs
+== lab1 is a cluster of three PCs
 
 I used three PCs to build a reasonably complicated network.
+
+image::home-lab-1.jpeg[]
+
 Each PC has a purpose.
 One PC acts as an application builder and manager. It manages the building of things.  Another PC provides sources of data for this builder, and one is supplied by the builder.
 
